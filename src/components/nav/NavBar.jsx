@@ -3,6 +3,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import { iconList } from "./NavIcon";
 import { useLocation, useNavigate } from "react-router-dom";
+import diaryImg from "../../assets/images/diary.png";
 
 const NavBar = () => {
   const [navbar, setNavbar] = useState(true);
@@ -22,6 +23,9 @@ const NavBar = () => {
     <div className={`nav-wrapper ${navbar ? "" : "hide"}`}>
       <div className="nav-header">
         <div className="profile-box">
+          <div className="hide-btn" onClick={hideNavbar}>
+            {navbar ? <ArrowBackIosNewIcon /> : <ArrowForwardIosOutlinedIcon />}
+          </div>
           <div className="img-box">
             <div className="img"></div>
           </div>
@@ -33,6 +37,7 @@ const NavBar = () => {
       <div className="nav-menu">
         {iconList.map((menu) => (
           <ul
+            key={menu.path}
             className={`menu-list ${location.pathname === menu.path ? "menu" : ""}`}
             onClick={() => toggleMenu(menu.name, menu.path)}
           >
@@ -44,11 +49,10 @@ const NavBar = () => {
             </li>
           </ul>
         ))}
-        <div className="hide-btn" onClick={hideNavbar}>
-          {navbar ? <ArrowBackIosNewIcon /> : <ArrowForwardIosOutlinedIcon />}
-        </div>
       </div>
-      <div className="nav-footer">footer</div>
+      <div className="nav-footer">
+        <img src={diaryImg} alt="diary" />
+      </div>
     </div>
   );
 };
