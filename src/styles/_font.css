@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+/* 고운바탕 */
+@font-face {
+  font-family: "GowunBatang";
+  src: url(../assets/fonts/GowunBatang-Regular.woff) format("woff");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "GowunBatang";
+  src: url(../assets/fonts/GowunBatang-Bold.woff) format("woff");
+  font-style: normal;
+  font-weight: bold;
+}

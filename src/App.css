@@ -1,0 +1,8 @@
+@charset "utf-8";
+@import "./styles/_font.css";
+/* 전역스타일 */
+
+* {
+  font-family: "GowunBatang", sans-serif !important;
+  font-weight: normal !important;
+}

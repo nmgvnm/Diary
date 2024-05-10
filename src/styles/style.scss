@@ -1,0 +1,20 @@
+@import "./mixin";
+@import "./variables";
+@import "./_reset.css";
+
+.body-wrapper {
+  display: flex;
+  height: 100vh;
+  background-color: lightcyan;
+  .nav-bar {
+    width: 250px;
+    background-color: lightblue;
+  }
+  .contents-wrapper {
+    background-color: lightcoral;
+    flex: 1;
+    .main {
+
+    }
+  }
+}
