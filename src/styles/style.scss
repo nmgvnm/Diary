@@ -2,19 +2,143 @@
 @import "./variables";
 @import "./_reset.css";
 
+*{
+  transition: all 0.3s;
+}
 .body-wrapper {
   display: flex;
   height: 100vh;
-  background-color: lightcyan;
+  font-size: 18px;
+  box-sizing: border-box;
   .nav-bar {
-    width: 250px;
     background-color: lightblue;
+    overflow: hidden;
   }
   .contents-wrapper {
-    background-color: lightcoral;
     flex: 1;
-    .main {
+    background-color: $light_grey_blue_color;
+  }
+}
 
+.nav-wrapper {
+  color: #fff;
+  width: 350px;
+  transition: all 0.5s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .nav-header {
+    background-color: $dark_green_color_2;
+    height: 240px;
+    .profile-box {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .img-box {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 2px solid $light_grey_blue_color;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .img {
+          width: 112px;
+          height: 112px;
+          background-color: aqua;
+          border-radius: 50%;
+          background-image: url(../assets/images/img1.jpg);
+          background-size: cover;
+          background-position: -55px;
+          background-repeat: no-repeat;
+        }
+      }
+      .text-box {
+        span {
+          padding: 10px;
+          border-bottom: 1px $light_grey_blue_color solid;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+  .nav-menu {
+    background-color: $dark_green_color_3;
+    flex: 1;
+    position: relative;
+    padding: 20px 0;
+    .menu-list {
+      padding-right: 0;
+      padding-left: 10px;
+      cursor: pointer;
+      li {
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border-radius: 0 0 0 25px;
+        .icon {
+          padding-right: 15px;
+          svg {
+            font-size: 2rem;
+          }
+        }
+        .text {
+          white-space: nowrap;
+          transition: all 0.2s;
+          font-size: 1.2rem;
+          font-weight: bold;
+        }
+      }
+      &.menu {
+        li {
+          background-color: $light_grey_blue_color;
+          color: $dark_green_color_1;
+          svg {
+            color: $dark_green_color_1;
+          }
+        }
+      }
+    }
+    .hide-btn {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+  }
+  .nav-footer {
+    background-color: $dark_green_color_3;
+  }
+  &.hide {
+    width: 80px;
+    .menu-list {
+      li {
+        .text {
+          opacity: 0;
+        }
+      }
+    }
+    .nav-header {
+      .profile-box {
+        justify-content: flex-end;
+        .img-box {
+          width: 60px;
+          height: 60px;
+          .img {
+            width: 52px;
+            height: 52px;
+            background-position: -25px;
+          }
+        }
+        .text-box {
+          display: none;
+        }
+      }
     }
   }
 }

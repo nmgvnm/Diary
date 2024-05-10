@@ -7,12 +7,11 @@ import { routerlist } from "./router";
 import { useState } from "react";
 
 function App() {
-  const [navbar, setNavbar] = useState(true)
   return (
     <Router>
       <div className="body-wrapper">
         <div className="nav-bar">
-          <NavBar state={setNavbar} />
+          <NavBar />
         </div>
         <div className="contents-wrapper">
           <div className="main">
