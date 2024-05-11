@@ -5,12 +5,13 @@ import { iconList } from "./NavIcon";
 import { useLocation, useNavigate } from "react-router-dom";
 import diaryImg from "../../assets/images/diary.png";
 
-const NavBar = () => {
+const NavBar = ({ setState }) => {
   const [navbar, setNavbar] = useState(true);
   const location = useLocation();
   const nav = useNavigate();
   const hideNavbar = () => {
     setNavbar((prevState) => !prevState);
+    setState((prevState) => !prevState);
   };
   const toggleMenu = (menuName, path) => {
     if (path) {

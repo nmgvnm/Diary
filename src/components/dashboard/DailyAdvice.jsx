@@ -10,7 +10,7 @@ const DailyAdvice = () => {
   console.log("dailyAdvice:", dailyAdvice);
 
   return (
-    <div className="daily-advice-wrapper">
+    <div className="daily-advice-wrapper card">
       <div className="container">
         <div className="title header">Daily Advice</div>
         <div className="advice">

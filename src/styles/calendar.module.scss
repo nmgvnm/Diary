@@ -1,0 +1,64 @@
+@import "./variables";
+
+.react-calendar {
+  border: none !important;
+  border-radius: 10px;
+  background-color: white;
+  .react-calendar__navigation {
+    justify-content: center;
+  }
+  .react-calendar__month-view {
+    abbr {
+      color: $dark_green_color_1;
+    }
+  }
+  .react-calendar__navigation__label {
+    flex-grow: 0 !important;
+  }
+  .react-calendar__month-view__weekdays abbr {
+    text-decoration: none;
+    font-weight: 800;
+  }
+  .react-calendar__tile--now {
+    background: none;
+    abbr {
+      color: #0033ff;
+    }
+  }
+
+  /* 네비게이션 월 스타일 적용 */
+  .react-calendar__year-view__months__month {
+    border-radius: 0.8rem;
+    padding: 0;
+  }
+  /* 네비게이션 현재 월 스타일 적용 */
+  .react-calendar__tile--hasActive {
+    background-color: $dark_green_color_2;
+    abbr {
+      color: white;
+    }
+  }
+  // /* 일 날짜 간격 */
+  .react-calendar__tile {
+    padding: 10px 0px 20px;
+    position: relative;
+  }
+  .react-calendar__tile:enabled:hover,
+  .react-calendar__tile:enabled:focus,
+  .react-calendar__tile--active {
+    background-color: $point_orange_color;
+    border-radius: 0.3rem;
+  }
+  width: 100% !important;
+}
+.react-calendar {
+  &__month-view {
+    &__weekdays {
+      &__weekday--weekend {
+        abbr[title="일요일"] {
+          color: red; /* 빨간색 폰트로 스타일 적용 */
+        }
+      }
+    }
+  }
+}

@@ -1,14 +1,18 @@
 @import "./mixin";
 @import "./variables";
 @import "./_reset.css";
+@import "./calendar.module.scss";
 
 * {
   transition: all 0.3s;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 .body-wrapper {
   display: flex;
   height: 100vh;
-  font-size: 18px;
+  font-size: 16px;
   box-sizing: border-box;
   .nav-bar {
     background-color: lightblue;
@@ -17,6 +21,7 @@
   .contents-wrapper {
     flex: 1;
     background-color: $light_grey_blue_color;
+    min-width: 1547px;
   }
   .main {
     width: 100%;
@@ -24,11 +29,18 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    overflow-y: scroll;
   }
 }
 .title {
   padding: 10px;
   font-weight: bold;
+}
+.card {
+  @include boxShadow();
+  background-color: #fff;
+  border-radius: 17px;
+  padding: 10px;
 }
 
 .nav-wrapper {
@@ -171,11 +183,11 @@
   padding: 30px;
   width: 90%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(7, 1fr);
   gap: 15px;
 }
 .daily-advice-wrapper {
-  grid-column: 1 / 4;
+  grid-column: 1 / 5;
   color: #fff;
   background-color: $dark_green_color_2;
   height: 150px;
@@ -204,4 +216,69 @@
       }
     }
   }
+}
+
+.memo-box-wrapper {
+  grid-row: 2 / 3;
+  grid-column: 1 / 5;
+  .memo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .contents {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    height: 260px;
+    overflow-y: scroll;
+    .box {
+      width: 100%;
+      max-width: 219px;
+      height: 260px;
+      background-image: url(../assets/images/memo_img.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: 50% 50%;
+      position: relative;
+      .date {
+        position: absolute;
+        font-size: 0.9rem;
+        right: 25px;
+        top: 50px;
+      }
+      .text {
+        position: absolute;
+        word-break: keep-all;
+        line-height: 1.3;
+        top: 90px;
+        left: 40px;
+        width: 150px;
+        max-height: 130px; /* 최대 높이 지정 */
+        overflow: scroll;
+      }
+    }
+  }
+}
+
+.todo-list-wrapper {
+  grid-column: 5 / 8;
+  grid-row: 1 / 3;
+}
+
+.calendar-wrapper {
+  grid-column: 1 / 3;
+  height: 430px;
+  display: flex;
+  flex-direction: column;
+  .calendar-box {
+    padding: 0 10px;
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+}
+.daily-card-wrapper {
+  grid-column: 3 / 8;
 }
