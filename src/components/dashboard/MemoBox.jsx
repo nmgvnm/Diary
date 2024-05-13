@@ -5,7 +5,7 @@ const MemoBox = () => {
   return (
     <div className="memo-box-wrapper card">
       <div className="memo-header">
-        <div className="title">MemoBox</div>
+        <div className="title">Memo</div>
         <div className="more">{`view more >`}</div>
       </div>
       <div className="contents">
