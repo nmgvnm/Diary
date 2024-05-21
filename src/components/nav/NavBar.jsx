@@ -39,7 +39,8 @@ const NavBar = ({ setState }) => {
         {iconList.map((menu) => (
           <ul
             key={menu.path}
-            className={`menu-list ${location.pathname === menu.path ? "menu" : ""}`}
+            className={`menu-list ${location.pathname.includes(menu.path) ? "menu" : ""
+          }`}
             onClick={() => toggleMenu(menu.name, menu.path)}
           >
             <li>
