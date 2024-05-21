@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FormattedDate from "../components/FormattedDate";
+import TitleBox from "../components/TitleBox";
 
 const Memo = () => {
   const [posts, setPosts] = useState([]);
@@ -17,21 +18,31 @@ const Memo = () => {
     fetchData();
   }, []);
 
-  const date = new Date();
-
   return (
-    <div>
-      <h1>Posts List</h1>
-      <div>
-        created at : <FormattedDate date={date} />
+    <div className="memo-list-wrapper page">
+      <TitleBox title="Memo" />
+      <div className="btn-box">
+        <span className="btn">+ New</span>
       </div>
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>
-            <Link to={`/memo/${post.id}`}>{post.text}</Link>
-          </li>
-        ))}
-      </ul>
+      <div className="contents-list">
+        <ul>
+          {posts.map((post) => (
+            <li key={post.id}>
+              <Link to={`/memo/${post.id}`}>
+                <div >
+                  <div className="title">{post.text}</div>
+                  <div>
+                    <div className="date">
+                      <FormattedDate date={post.createdAt} format="YY.MM.DD" />
+                    </div>
+                    <div className="content">{post.text}</div>
+                  </div>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
