@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import data from "../../data/memo_data.json";
 import FormattedDate from "../FormattedDate";
 
 const MemoBox = () => {
