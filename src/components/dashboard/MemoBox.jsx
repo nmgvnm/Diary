@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import FormattedDate from "../FormattedDate";
+import { useNavigate } from "react-router-dom";
 
 const MemoBox = () => {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     fetchData();
   }, []);
+  const handleNavigate = () => {
+    navigate(`/memo`)
+  }
 
   const fetchData = async () => {
     try {
@@ -20,7 +25,7 @@ const MemoBox = () => {
     <div className="memo-box-wrapper card">
       <div className="memo-header">
         <div className="title">Memo</div>
-        <div className="more">{`view more >`}</div>
+        <div className="more" onClick={handleNavigate}>{`view more >`}</div>
       </div>
       <div className="contents">
         {data.map((item, idx) => (

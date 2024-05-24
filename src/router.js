@@ -1,4 +1,4 @@
-import MemoContents from "./components/MemoContents";
+import MemoNew from "./components/memo/MemoNew";
 import Daily from "./pages/Daily";
 import Dashboard from "./pages/Dashboard";
 import Memo from "./pages/Memo";
@@ -11,5 +11,5 @@ export const routerlist = [
   { path: "/weekly", element: <Weekly /> },
   { path: "/munsley", element: <Munsley /> },
   { path: "/memo", element: <Memo /> },
-  { path: "/test", element: <MemoContents /> },
+  { path: "/memo/new", element: <MemoNew /> },
 ];
