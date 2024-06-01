@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FormattedDate from "../FormattedDate";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 
 const MemoEdit = ({ date, content, mode, edit, update }) => {
-  
   const handleInputChange = (e) => {
-    const {name, value} = e.target
-    edit({...content, [name] : value})
-  }
+    const { name, value } = e.target;
+    edit({ ...content, [name]: value });
+  };
   const handleUpdateData = () => {
-    update("memo")
+    update("memo");
     mode(false);
-  }
+  };
 
- 
+  const handleKeyDown = (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === "s") {
+      e.preventDefault();
+      handleUpdateData();
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div className="container edit">
       <div className="main-header">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormattedDate from "../FormattedDate";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +38,23 @@ const MemoNew = () => {
       console.error("Error fetching posts:", error);
     }
   };
-  console.log(content);
+
+  const handleKeyDown = (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === "s") {
+      e.preventDefault();
+      fetchSaveData();
+    }
+  };
+
+  // eslint-disable-next-line
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div className="memo-content-wrapper page">
       <div className="container edit">
