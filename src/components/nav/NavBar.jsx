@@ -4,6 +4,7 @@ import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutl
 import { iconList } from "./NavIcon";
 import { useLocation, useNavigate } from "react-router-dom";
 import diaryImg from "../../assets/images/diary.png";
+import Logout from "../auth/Logout";
 
 const NavBar = ({ setState }) => {
   const [navbar, setNavbar] = useState(true);
@@ -53,6 +54,7 @@ const NavBar = ({ setState }) => {
         ))}
       </div>
       <div className="nav-footer">
+        <Logout />
         <img src={diaryImg} alt="diary" />
       </div>
     </div>

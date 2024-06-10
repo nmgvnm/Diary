@@ -6,6 +6,9 @@ import NavBar from "./components/nav/NavBar";
 import { routerlist } from "./router";
 import { useState } from "react";
 import MemoContents from "./components/MemoContents";
+import PrivateRoute from "./components/PrivateRoute";
+import RegisterForm from "./components/auth/Register";
+import Login from "./components/auth/Login";
 
 function App() {
   const [state, setState] = useState(true);
@@ -19,10 +22,14 @@ function App() {
           <div className="main">
             <Routes>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
-              {routerlist.map((route) => (
-                <Route key={route.path} path={route.path} element={route.element} />
-              ))}
-              <Route path="/memo/:memoId" element={<MemoContents />} />
+              <Route path="/register" element={<RegisterForm />}/>
+              <Route path="/login" element={<Login />}/>
+              <Route element={<PrivateRoute />}>
+                {routerlist.map((route) => (
+                  <Route key={route.path} path={route.path} element={route.element} />
+                ))}
+                <Route path="/memo/:memoId" element={<MemoContents />} />
+              </Route>
             </Routes>
           </div>
         </div>
