@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import FormattedDate from "../FormattedDate";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const MemoNew = () => {
   const [content, setContent] = useState({ text: "" });
@@ -11,38 +12,37 @@ const MemoNew = () => {
     const { name, value } = e.target;
     setContent({ ...content, [name]: value });
   };
-
+  console.log("content:", content);
   const handleNavigate = (id) => {
     navigate(`/memo/${id}`);
   };
 
   // API
-  const fetchSaveData = async (category) => {
-    console.log(content);
+  const fetchSaveDataUser = async () => {
     try {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_IP}/data/save`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          category: category,
-          saveData: content,
-        }),
-      });
-      const data = await res.json();
-      console.log(data);
-      setContent(data);
-      handleNavigate(data._id);
+      const token = localStorage.getItem("token");
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_IP}/api/posts/data/save/test?category=memo`,
+        { saveData: content },
+        {
+          headers: {
+            "x-auth-token": token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(res.data);
+      setContent({ text: res.data.text });
+      handleNavigate(res.data._id);
     } catch (error) {
-      console.error("Error fetching posts:", error);
+      console.error(error);
     }
   };
 
   const handleKeyDown = (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === "s") {
       e.preventDefault();
-      fetchSaveData();
+      fetchSaveDataUser();
     }
   };
 
@@ -62,13 +62,19 @@ const MemoNew = () => {
           <div>
             <FormattedDate date={new Date()} format="YYYY년 MM월 DD일" />{" "}
           </div>
-          <div className="btn btn-orange" onClick={() => fetchSaveData("memo")}>
+          <div className="btn btn-orange" onClick={fetchSaveDataUser}>
             <SaveOutlinedIcon style={{ fontSize: "18px" }} />
             저장
           </div>
         </div>
         <div className="memo-content">
-          <textarea name="text" id="memoContents" onChange={handleInputChange} value={content.text}></textarea>
+          <textarea
+            placeholder="Enter your memo here"
+            name="text"
+            id="memoContents"
+            onChange={handleInputChange}
+            value={content.text}
+          ></textarea>
         </div>
       </div>
     </div>

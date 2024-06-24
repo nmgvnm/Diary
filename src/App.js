@@ -12,10 +12,11 @@ import Login from "./components/auth/Login";
 
 function App() {
   const [state, setState] = useState(true);
+  const token = localStorage.getItem("token")
   return (
     <Router>
       <div className="body-wrapper">
-        <div className="nav-bar" style={{ minWidth: state ? "250px" : "80px" }}>
+        <div className={`nav-bar ${token ? "" : "none"}`} style={{ minWidth: state ? "250px" : "80px" }}>
           <NavBar setState={setState} />
         </div>
         <div className="contents-wrapper">

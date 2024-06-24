@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FormattedDate from "../FormattedDate";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const MemoBox = () => {
   const [data, setData] = useState([]);
@@ -9,14 +10,18 @@ const MemoBox = () => {
     fetchData();
   }, []);
   const handleNavigate = () => {
-    navigate(`/memo`)
-  }
-
+    navigate(`/memo`);
+  };
   const fetchData = async () => {
     try {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_IP}/data/list?category=memo`);
-      const data = await res.json();
-      setData(data);
+      const token = localStorage.getItem("token");
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_IP}/api/posts/list?category=memo`, {
+        headers: {
+          "x-auth-token": token,
+        },
+      });
+      setData(res.data);
+      console.log("memo list => res:", res);
     } catch (error) {
       console.error("Error fetching posts:", error);
     }

@@ -3,14 +3,23 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const RegisterForm = () => {
-  const [formData, setformData] = useState({ username: "", Password: "" });
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+    diaryName: "",
+  });
   const navigate = useNavigate();
-  const { username, password } = formData;
+  const { username, password, confirmPassword, diaryName } = formData;
 
-  const onChange = (e) => setformData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
     try {
       await axios.post(`${process.env.REACT_APP_SERVER_IP}/api/auth/register`, formData);
       navigate("/login");
@@ -18,20 +27,67 @@ const RegisterForm = () => {
       console.error(err.response.data);
     }
   };
+
+  const nav = (path) => {
+    navigate(path);
+  };
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label>Username</label>
-          <input type="text" name="username" value={username} onChange={onChange} required />
+    <div className="register_container">
+      <div className="register_wrapper">
+        <div className="register_title">
+          <h1>Sing up</h1>
         </div>
-        <div>
-          <label>Password</label>
-          <input type="password" name="password" value={password} onChange={onChange} required />
+        <div className="register_form_wrapper">
+          <form onSubmit={onSubmit}>
+            <div>
+              <label>아이디</label>
+              <input type="text" name="username" placeholder="ID" value={username} onChange={onChange} required />
+            </div>
+            <div>
+              <label>비밀번호</label>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={onChange}
+                placeholder="Password"
+                required
+              />
+            </div>
+            <div>
+              <label>비밀번호 확인</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={confirmPassword}
+                onChange={onChange}
+                placeholder="Confirm Password"
+                required
+              />
+            </div>
+            <div>
+              <label>다이어리 이름</label>
+              <input
+                type="text"
+                name="diaryName"
+                value={diaryName}
+                onChange={onChange}
+                placeholder="Diary Name"
+                required
+              />
+            </div>
+
+            <div className="btn_box">
+              <button type="submit" className="singup_btn btn">
+                Sing up
+              </button>
+              <button className="login_btn btn" onClick={() => nav("/login")}>
+                Login
+              </button>
+            </div>
+          </form>
         </div>
-        <button type="submit">Register</button>
-      </form>
+      </div>
     </div>
   );
 };

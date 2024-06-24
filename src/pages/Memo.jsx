@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import FormattedDate from "../components/FormattedDate";
 import TitleBox from "../components/TitleBox";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Memo = () => {
   const [posts, setPosts] = useState([]);
@@ -10,10 +11,14 @@ const Memo = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`${process.env.REACT_APP_SERVER_IP}/data/list?category=memo`);
-        const data = await res.json();
-        setPosts(data);
-        console.log("data :", data);
+        const token = localStorage.getItem("token");
+        const res = await axios.get(`${process.env.REACT_APP_SERVER_IP}/api/posts/list?category=memo`, {
+          headers: {
+            "x-auth-token": token,
+          },
+        });
+        setPosts(res.data);
+        console.log("memo list => res:", res);
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
@@ -75,7 +80,7 @@ const Memo = () => {
           </ul>
         ) : (
           <ul className="none-contents">
-           <li>메모 없음</li>
+            <li>메모 없음</li>
           </ul>
         )}
       </div>

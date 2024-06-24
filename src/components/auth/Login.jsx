@@ -17,27 +17,43 @@ const Login = () => {
       navigate("/");
     } catch (err) {
       console.error(err.response.data);
+    } finally {
+      window.location.reload();
     }
   };
   const nav = (path) => {
-    navigate(path)
-  }
+    navigate(path);
+  };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label>Username</label>
-          <input type="text" name="username" value={username} onChange={onChange} required />
+    <div className="login_container">
+      <div className="login_wrapper">
+        <div className="login_title">
+          <h1>Login</h1>
         </div>
-        <div>
-          <label>Password</label>
-          <input type="password" name="password" value={password} onChange={onChange} required />
+        <div className="login_form_wrapper">
+          <form onSubmit={onSubmit}>
+            <div>
+              <label>ID</label>
+              <input type="text" name="username" value={username} onChange={onChange} required />
+            </div>
+            <div>
+              <label>PW</label>
+              <input type="password" name="password" value={password} onChange={onChange} required />
+            </div>
+            <button className="login_btn btn" type="submit">Login</button>
+            <button className="singup_btn btn" onClick={() => nav("/register")}>
+              Sing up
+            </button>
+          </form>
         </div>
-        <button type="submit">Login</button>
-        <button type="submit" onClick={() => nav("/register")}>회원가입</button>
-      </form>
+        <div className="text_account_box">
+          <p>{"TEST Account ( 테스트 계정 )"}</p>
+          <p>ID : apple</p>
+          <p>PW : apple</p>
+        </div>
+        
+      </div>
     </div>
   );
 };
