@@ -1,20 +1,27 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { useModal } from "../../context/ModalContext";
 
 const Logout = () => {
   const navigate = useNavigate();
+  const { showModal } = useModal();
 
-  const handleLogout = async () => {
-    try {
-      localStorage.removeItem("token");
-
-      navigate("/login");
-    } catch (error) {
-      console.error("Error logging out:", error);
-    } finally {
-      window.location.reload();
-    }
+  const handleLogout = () => {
+    console.log("로그아웃 버튼 클릭");
+    showModal(
+      "confirm",
+      "로그아웃 하시겠습니까?",
+      () => {
+        console.log("Confirmed"); 
+        localStorage.removeItem("token");
+        navigate("/login");
+        window.location.reload();
+      },
+      () => {
+        console.log("Cancelled"); 
+      }
+    );
   };
   return (
     <div className="logout-btn-wrap" onClick={handleLogout}>

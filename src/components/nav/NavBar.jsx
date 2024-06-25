@@ -16,7 +16,7 @@ const NavBar = ({ setState }) => {
     diaryName: "",
   });
   const location = useLocation();
-  const nav = useNavigate();
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -34,11 +34,14 @@ const NavBar = ({ setState }) => {
         }
       } catch (error) {
         console.error(error.response ? error.response.data : "Error fetching profile");
+        localStorage.removeItem("token");
+        navigate("/login");
+        window.location.reload();
       }
     };
 
     fetchProfile();
-  }, [token]);
+  }, [token, navigate]);
 
   const hideNavbar = () => {
     setNavbar((prevState) => !prevState);
@@ -46,7 +49,7 @@ const NavBar = ({ setState }) => {
   };
   const toggleMenu = (menuName, path) => {
     if (path) {
-      nav(path);
+      navigate(path);
     }
     sessionStorage.setItem("pathName", path);
     sessionStorage.setItem("name", menuName);
