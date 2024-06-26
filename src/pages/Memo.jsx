@@ -6,7 +6,7 @@ import axiosInstance from "../utils/axios-config";
 
 const Memo = () => {
   const [posts, setPosts] = useState([]);
-  const [seletedItems, setSeletedItems] = useState([]);
+  // const [seletedItems, setSeletedItems] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
