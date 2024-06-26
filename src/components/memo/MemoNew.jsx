@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import FormattedDate from "../FormattedDate";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../utils/axios-config";
 
 const MemoNew = () => {
   const [content, setContent] = useState({ text: "" });
@@ -20,14 +20,12 @@ const MemoNew = () => {
   // API
   const fetchSaveDataUser = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const res = await axios.post(
-        `${process.env.REACT_APP_SERVER_IP}/api/posts/data/save/test?category=memo`,
+      const res = await axiosInstance.post(
+        `/api/posts/save`,
         { saveData: content },
         {
-          headers: {
-            "x-auth-token": token,
-            "Content-Type": "application/json",
+          params: {
+            category: "memo",
           },
         }
       );

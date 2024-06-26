@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import FormattedDate from "../FormattedDate";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../utils/axios-config"
+
 
 const MemoBox = () => {
   const [data, setData] = useState([]);
@@ -14,10 +15,9 @@ const MemoBox = () => {
   };
   const fetchData = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const res = await axios.get(`${process.env.REACT_APP_SERVER_IP}/api/posts/list?category=memo`, {
-        headers: {
-          "x-auth-token": token,
+      const res = await axiosInstance.get("/api/posts/list", {
+        params: {
+          category: "memo",
         },
       });
       setData(res.data);

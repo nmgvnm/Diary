@@ -25,7 +25,7 @@ const NavBar = ({ setState }) => {
         if (!token) {
           console.log("로그아웃상태");
         } else {
-          const res = await axios.get(`${process.env.REACT_APP_SERVER_IP}/api/profile`, {
+          const res = await axios.get(`${process.env.REACT_APP_SERVER_IP}/api/auth/profile`, {
             headers: {
               "x-auth-token": token,
             },

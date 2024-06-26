@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useModal } from "../../context/ModalContext";
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const navigate = useNavigate();
+  const { showModal } = useModal();
   const { username, password } = formData;
 
   const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -13,12 +15,21 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(`${process.env.REACT_APP_SERVER_IP}/api/auth/login`, formData);
-      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("token", res.data.accessToken);
+      localStorage.setItem("refresh-token", res.data.refreshToken);
       navigate("/");
+      window.location.reload();
     } catch (err) {
       console.error(err.response.data);
-    } finally {
-      window.location.reload();
+      if (err.response.data.msg === "Invalid credentials (err id )") {
+        showModal("", "존재하지 않는 ID입니다.", () => {
+          console.log("ok");
+        });
+      } else if (err.response.data.msg === "Invalid credentials ( err password )") {
+        showModal("", "비밀번호를 확인해주세요.", () => {
+          console.log("ok");
+        });
+      }
     }
   };
   const nav = (path) => {
@@ -41,7 +52,9 @@ const Login = () => {
               <label>PW</label>
               <input type="password" name="password" value={password} onChange={onChange} required />
             </div>
-            <button className="login_btn btn" type="submit">Login</button>
+            <button className="login_btn btn" type="submit">
+              Login
+            </button>
             <button className="singup_btn btn" onClick={() => nav("/register")}>
               Sing up
             </button>
@@ -52,7 +65,6 @@ const Login = () => {
           <p>ID : apple</p>
           <p>PW : apple</p>
         </div>
-        
       </div>
     </div>
   );

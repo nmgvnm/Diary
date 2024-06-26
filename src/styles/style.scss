@@ -339,6 +339,73 @@
 .todo-list-wrapper {
   grid-column: 5 / 8;
   grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  .todo-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    .input-wrapper {
+      display: flex;
+      padding: 10px;
+      input {
+        border: none;
+        outline: none;
+        flex: 1;
+        margin-right: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid $dark_green_color_1;
+        background-color: $dark_green_color_2;
+        font-size: 1rem;
+        color: #fff;
+      }
+      .btn-dark,
+      .btn-orange {
+        width: 75px;
+        transition: all 0.2s;
+        display: flex;
+        justify-content: center;
+        &:hover {
+          &::after,
+          &::before {
+            display: none;
+          }
+        }
+      }
+      .btn-dark {
+        &:hover {
+          background-color: $dark_green_color_3;
+        }
+      }
+      .btn-orange {
+        margin-left: 10px;
+        &:hover {
+          background-color: $light_point_orange_color;
+        }
+      }
+    }
+    .todo-list {
+      height: 400px;
+      overflow-y: scroll;
+      .todo-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #ededed;
+        > p:first-child {
+          padding-top: 3px;
+        }
+        .task-item {
+          margin-left: 5px;
+          &.completed {
+            text-decoration: line-through;
+            color: #8b8b8b;
+          }
+        }
+      }
+    }
+  }
 }
 
 .calendar-wrapper {
@@ -945,7 +1012,7 @@
       }
       .btn_box {
         display: flex;
-  
+
         button {
           cursor: pointer;
           outline: none;
@@ -955,14 +1022,10 @@
             justify-content: center;
             &.ok_btn {
               margin-right: 10px;
-            
             }
           }
         }
       }
     }
   }
-}
-
-.modal-content {
 }
