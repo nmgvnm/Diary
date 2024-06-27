@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import diaryImg from "../../assets/images/diary.png";
 import Logout from "../auth/Logout";
 import axios from "axios";
+import img1 from "../../assets/images/img1.jpg";
 
 const NavBar = ({ setState }) => {
   const [navbar, setNavbar] = useState(true);
@@ -63,7 +64,12 @@ const NavBar = ({ setState }) => {
             {navbar ? <ArrowBackIosNewIcon /> : <ArrowForwardIosOutlinedIcon />}
           </div>
           <div className="img-box">
-            <div className="img"></div>
+            <div
+              className="img"
+              style={{
+                backgroundImage: user.profileImage === "none" ? `url(${img1})` : `url(${user.profileImage})`,
+              }}
+            ></div>
           </div>
           <div className="text-box">
             <span>{user.diaryName}</span>

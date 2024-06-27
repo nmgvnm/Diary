@@ -4,17 +4,22 @@ import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
 import DailyGridContents from "../components/daily/DailyGridContents";
 import DailyListContents from "../components/daily/DailyListContents";
+import { useNavigate } from "react-router-dom";
 
 const Daily = () => {
   const [selectCategory, setSelectCategory] = useState("전체");
   const [align, setAlign] = useState("list");
   const category = ["전체", "일상", "여행", "맛도리"];
+  const nav = useNavigate();
 
   const handleSelectCategory = (category) => {
     setSelectCategory(category);
   };
   const handleSelectAlign = (align) => {
     setAlign(align);
+  };
+  const handleNavigate = (path) => {
+    nav(path);
   };
 
   return (
@@ -43,9 +48,13 @@ const Daily = () => {
             </span>
           </div>
         </div>
-        <span className="btn">+ New</span>
+        <span className="btn" onClick={() => handleNavigate("/daily/new")}>
+          + New
+        </span>
       </div>
-      <div className={`contents-list ${align === "grid" ? "" : "list"}`}>{align === "grid" ? <DailyGridContents /> : <DailyListContents />}</div>
+      <div className={`contents-list ${align === "grid" ? "" : "list"}`}>
+        {align === "grid" ? <DailyGridContents /> : <DailyListContents />}
+      </div>
     </div>
   );
 };

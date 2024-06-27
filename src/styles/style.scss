@@ -516,6 +516,12 @@
   flex-direction: column;
   .btn-box {
     justify-content: flex-end;
+    .btn {
+      margin-left: 10px;
+      width: 82px;
+      display: flex;
+      justify-content: center;
+    }
   }
   .contents-list {
     margin-top: 15px;
@@ -524,14 +530,22 @@
     flex: 1;
     border-radius: 14px;
     overflow: scroll;
-
     ul {
       li {
         border-bottom: 1px solid $light_green_color_2;
         padding: 10px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        &.checked {
+          background-color: $light_point_orange_color;
+        }
+        .selcete-btn {
+          height: 100%;
+        }
         > div {
           padding: 10px 10px 0 10px;
+
           .title {
             padding: 0;
             padding-bottom: 8px;
@@ -1023,6 +1037,86 @@
             &.ok_btn {
               margin-right: 10px;
             }
+          }
+        }
+      }
+    }
+  }
+}
+
+.daily-content-wrapper {
+  .daily-content-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .main-header {
+      display: flex;
+      > div {
+        &:first-child {
+          flex: 1;
+          margin-right: 10px;
+          border-radius: 4px;
+          padding: 10px;
+          display: flex;
+          font-weight: bold;
+          font-size: 1.1rem;
+          background-color: $dark_green_color_2;
+          color: #fff;
+        }
+      }
+    }
+    .daily-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      .title-input {
+        background-image: url(../assets/images/img18.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+        margin-top: 20px;
+        height: 200px;
+        display: flex;
+        align-items: flex-end;
+        padding: 20px;
+        position: relative;
+        border-radius: 5px 5px 0 0;
+        &::after {
+          content: "";
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          background-color: #00000076;
+        }
+        input {
+          z-index: 999;
+          width: 100%;
+          padding: 10px;
+          font-size: 1.5rem;
+          outline: none;
+          background-color: $dark_green_color_2;
+          color: #fff;
+          border: none;
+          border-bottom: 2px solid #fff;
+
+        }
+      }
+      .editor {
+        flex: 1;
+        .quill {
+          height: 90%;
+          .ql-toolbar {
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            z-index: 999;
+          }
+          .ql-container {
+            font-size: 1rem;
+            padding-bottom: 20px;
+            background-color: #fff;
           }
         }
       }
