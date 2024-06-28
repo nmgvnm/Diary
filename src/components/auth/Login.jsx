@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/ModalContext";
+import axiosInstance from "../../utils/axios-config";
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -14,7 +14,7 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_IP}/api/auth/login`, formData);
+      const res = await axiosInstance.post("/api/auth/login", formData)
       localStorage.setItem("token", res.data.accessToken);
       localStorage.setItem("refresh-token", res.data.refreshToken);
       navigate("/");

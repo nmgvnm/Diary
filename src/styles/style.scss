@@ -77,7 +77,6 @@
         .img {
           width: 112px;
           height: 112px;
-          background-color: aqua;
           border-radius: 50%;
           background-image: url(../assets/images/img1.jpg);
           background-size: cover;
@@ -250,7 +249,6 @@
   grid-column: 1 / 5;
   color: #fff;
   background-color: $dark_green_color_2;
-  height: 150px;
   border-radius: 17px;
   display: flex;
   align-items: center;

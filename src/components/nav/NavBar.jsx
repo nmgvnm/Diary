@@ -5,8 +5,8 @@ import { iconList } from "./NavIcon";
 import { useLocation, useNavigate } from "react-router-dom";
 import diaryImg from "../../assets/images/diary.png";
 import Logout from "../auth/Logout";
-import axios from "axios";
 import img1 from "../../assets/images/img1.jpg";
+import axiosInstance from "../../utils/axios-config";
 
 const NavBar = ({ setState }) => {
   const [navbar, setNavbar] = useState(true);
@@ -26,11 +26,7 @@ const NavBar = ({ setState }) => {
         if (!token) {
           console.log("로그아웃상태");
         } else {
-          const res = await axios.get(`${process.env.REACT_APP_SERVER_IP}/api/auth/profile`, {
-            headers: {
-              "x-auth-token": token,
-            },
-          });
+          const res = await axiosInstance.get("/api/auth/profile");
           setUser(res.data);
         }
       } catch (error) {
