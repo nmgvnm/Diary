@@ -14,6 +14,7 @@ import { ModalProvider } from "./context/ModalContext";
 function App() {
   const [state, setState] = useState(true);
   const token = localStorage.getItem("token");
+
   return (
     <Router>
       <ModalProvider>

@@ -19,6 +19,8 @@ const NavBar = ({ setState }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const navBar = sessionStorage.getItem("navbar");
+  console.log(navBar);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -44,6 +46,19 @@ const NavBar = ({ setState }) => {
     setNavbar((prevState) => !prevState);
     setState((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    const savedNavbarState = sessionStorage.getItem("navbar");
+    if (savedNavbarState !== null) {
+      setNavbar(savedNavbarState === "true");
+    }
+  }, []);
+
+  // 상태가 변경될 때 sessionStorage에 저장
+  useEffect(() => {
+    sessionStorage.setItem("navbar", navbar);
+  }, [navbar]);
+
   const toggleMenu = (menuName, path) => {
     if (path) {
       navigate(path);

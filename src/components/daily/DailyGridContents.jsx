@@ -1,15 +1,14 @@
 import React from "react";
-import data from "../../data/daily_card.json";
 import FormattedDate from "../FormattedDate";
 
-const DailyGridContents = () => {
+const DailyGridContents = ({contentList}) => {
   return (
     <div className="daily-grid-content-wrap">
-      {data.map((item, idx) => (
+      {contentList.map((item, idx) => (
         <div className="daily-grid-content" style={{ backgroundImage: `url(${item.downloadUrl})` }} key={idx}>
           <div>
             <p>
-              <FormattedDate date={item.timeCreated} format="YY.MM.DD" />
+              <FormattedDate date={item.createdAt} format="YY.MM.DD" />
             </p>
             <p>{item.title}</p>
           </div>

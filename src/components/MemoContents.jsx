@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MemoRead from "./memo/MemoRead";
 import MemoEdit from "./memo/MemoEdit";
+import axiosInstance from "../utils/axios-config";
 
 const MemoContents = () => {
   const { memoId } = useParams(); // URL 파라미터에서 postId를 가져옴
@@ -28,21 +29,16 @@ const MemoContents = () => {
 
   const fetchUpdateData = async (category) => {
     try {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_IP}/data/update`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          category: category,
-          updateData: content,
-        }),
-      });
-      if (!res.ok) {
-        throw new Error("데이터 업데이트 실패");
-      }
-      const updatedMemo = await res.json();
-      console.log("업데이트된 메모 :", updatedMemo);
+      const res = await axiosInstance.put(
+        "/api/posts/update",
+        { updateData: content },
+        {
+          params: {
+            category: "memo",
+          },
+        }
+      );
+      console.log("업데이트된 메모 :", res.data);
     } catch (error) {
       console.error("Error fetching post:", error);
     }

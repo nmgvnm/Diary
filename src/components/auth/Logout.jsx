@@ -16,6 +16,8 @@ const Logout = () => {
         console.log("Confirmed"); 
         localStorage.removeItem("token");
         localStorage.removeItem("refresh-token");
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("refresh-token");
 
         navigate("/login");
         window.location.reload();

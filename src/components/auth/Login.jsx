@@ -14,9 +14,11 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axiosInstance.post("/api/auth/login", formData)
+      const res = await axiosInstance.post("/api/auth/login", formData);
       localStorage.setItem("token", res.data.accessToken);
       localStorage.setItem("refresh-token", res.data.refreshToken);
+      sessionStorage.setItem("token", res.data.accessToken);
+      sessionStorage.setItem("refresh-token", res.data.refreshToken);
       navigate("/");
       window.location.reload();
     } catch (err) {
