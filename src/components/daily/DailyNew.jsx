@@ -44,9 +44,9 @@ const DailyNew = () => {
     setIsCategoryOpen(false);
   };
 
-  const handleNavigate = (path) => {
-    nav(path);
-  };
+  // const handleNavigate = (path) => {
+  //   nav(path);
+  // };
 
   const handleSaveData = () => {
     showModal(
@@ -161,8 +161,8 @@ const DailyNew = () => {
     }
   };
   useEffect(() => {
-    fetchCategoryList();
-  }, []);
+    fetchCategoryList(); // eslint-disable-next-line
+  }, []); 
 
   const fetchCategoryList = async () => {
     try {
@@ -176,7 +176,7 @@ const DailyNew = () => {
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
-  };
+  }; 
   // const fetchAddCategory= async () => {
   //   try {
   //     const res = await axiosInstance.post(
