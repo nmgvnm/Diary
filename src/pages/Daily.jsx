@@ -26,12 +26,12 @@ const Daily = () => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, [selectCategory]);
+    fetchData(); // eslint-disable-next-line
+  }, [selectCategory]); // eslint-disable-next-line
 
   useEffect(() => {
-    fetchCategoryList();
-  }, []);
+    fetchCategoryList(); // eslint-disable-next-line
+  }, []); // eslint-disable-next-line
 
   const fetchData = async () => {
     try {

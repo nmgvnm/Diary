@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import FormattedDate from "../FormattedDate";
 import DOMPurify from "dompurify";
 import { useNavigate } from "react-router-dom";
 
 const DailyListContents = ({ contentList }) => {
-  const [selectedItems, setSelectedItems] = useState([]);
+  // const [selectedItems, setSelectedItems] = useState([]);
   const navigate = useNavigate();
   const extractTextFromHTML = (htmlString) => {
     // DOMPurify를 사용하여 HTML을 클린하게 처리
@@ -28,7 +28,7 @@ const DailyListContents = ({ contentList }) => {
   return (
     <div className="daily-list-content-wrap">
       {contentList.map((item, idx) => {
-        const isChecked = selectedItems.includes(item._id);
+        // const isChecked = selectedItems.includes(item._id);
         return (
           <div className="daily-list-content" onClick={() => handleNavigate(item._id)}>
             <div style={{ backgroundImage: `url(${item.titleImg})` }} className="img-box"></div>
