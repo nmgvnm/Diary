@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import FormattedDate from "../FormattedDate";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import { useNavigate } from "react-router-dom";
+import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
 import axiosInstance from "../../utils/axios-config";
 
 const MemoNew = () => {
@@ -12,10 +13,13 @@ const MemoNew = () => {
     const { name, value } = e.target;
     setContent({ ...content, [name]: value });
   };
-  console.log("content:", content);
   const handleNavigate = (id) => {
     navigate(`/memo/${id}`);
   };
+
+  const handleNavList = (path) => {
+    navigate(path)
+  }
 
   // API
   const fetchSaveDataUser = async () => {
@@ -60,6 +64,10 @@ const MemoNew = () => {
           <div>
             <FormattedDate date={new Date()} format="YYYY년 MM월 DD일" />{" "}
           </div>
+          <div className="btn btn-dark" onClick={() => handleNavList("/memo")} style={{marginRight: "5px"}}>
+          <FormatListBulletedOutlinedIcon style={{ fontSize: "18px" }} />
+          목록
+        </div>
           <div className="btn btn-orange" onClick={fetchSaveDataUser}>
             <SaveOutlinedIcon style={{ fontSize: "18px" }} />
             저장

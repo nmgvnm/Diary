@@ -10,9 +10,10 @@ import axiosInstance from "../utils/axios-config";
 const Daily = () => {
   const [selectCategory, setSelectCategory] = useState("전체");
   const [align, setAlign] = useState("list");
-  const category = ["전체", "일상", "여행", "맛도리"];
+  const [categoryList, setCategoryList] = useState([]);
   const [contentList, setContentList] = useState([]);
   const nav = useNavigate();
+  console.log("selectCategory:", selectCategory);
 
   const handleSelectCategory = (category) => {
     setSelectCategory(category);
@@ -26,6 +27,10 @@ const Daily = () => {
 
   useEffect(() => {
     fetchData();
+  }, [selectCategory]);
+
+  useEffect(() => {
+    fetchCategoryList();
   }, []);
 
   const fetchData = async () => {
@@ -33,6 +38,7 @@ const Daily = () => {
       const res = await axiosInstance.get("/api/posts/list", {
         params: {
           category: "daily",
+          details: selectCategory,
         },
       });
       setContentList(res.data);
@@ -43,6 +49,22 @@ const Daily = () => {
   };
   console.log("contentList:", contentList);
 
+  const fetchCategoryList = async () => {
+    try {
+      const res = await axiosInstance.get("/api/posts/list", {
+        params: {
+          category: "categoryList",
+        },
+      });
+      setCategoryList(res.data);
+      console.log("category list => ", categoryList);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  };
+
+  console.log("카테고리 리스트 : ", categoryList)
+
   return (
     <div className="daily-list-wrapper page">
       <TitleBox title="Daily Memory" />
@@ -50,13 +72,13 @@ const Daily = () => {
         <div className="category-box">
           <div>
             <span>카테고리</span>
-            {category.map((item, idx) => (
+            {categoryList.map((item, idx) => (
               <span
-                onClick={() => handleSelectCategory(item)}
-                className={`category ${selectCategory === item ? "select" : ""}`}
+                onClick={() => handleSelectCategory(item.name)}
+                className={`category ${selectCategory === item.name ? "select" : ""}`}
                 key={idx}
               >
-                {item}
+                {item.name}
               </span>
             ))}
           </div>
@@ -80,6 +102,7 @@ const Daily = () => {
           <DailyListContents contentList={contentList} />
         )}
       </div>
+      
     </div>
   );
 };

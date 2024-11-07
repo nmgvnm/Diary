@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import FormattedDate from "../FormattedDate";
 import DOMPurify from "dompurify";
+import { useNavigate } from "react-router-dom";
 
 const DailyListContents = ({ contentList }) => {
+  const [selectedItems, setSelectedItems] = useState([]);
+  const navigate = useNavigate();
   const extractTextFromHTML = (htmlString) => {
     // DOMPurify를 사용하여 HTML을 클린하게 처리
     const cleanHTML = DOMPurify.sanitize(htmlString);
@@ -18,20 +21,36 @@ const DailyListContents = ({ contentList }) => {
     tempDiv.innerHTML = formattedText;
     return tempDiv.innerText;
   };
+
+  const handleNavigate = (id) => {
+    navigate(`/daily/${id}`);
+  };
   return (
     <div className="daily-list-content-wrap">
-      {contentList.map((item, idx) => (
-        <div className="daily-list-content" key={idx}>
-          <div style={{ backgroundImage: `url(${item.downloadUrl})` }} className="img-box"></div>
-          <div className="text-box">
-            <p>
-              <FormattedDate date={item.createdAt} format="YY.MM.DD" />
-            </p>
-            <p>{item.title}</p>
-            <p>{extractTextFromHTML(item.content)}</p>
+      {contentList.map((item, idx) => {
+        const isChecked = selectedItems.includes(item._id);
+        return (
+          <div className="daily-list-content" onClick={() => handleNavigate(item._id)}>
+            <div style={{ backgroundImage: `url(${item.titleImg})` }} className="img-box"></div>
+            <div className="text-box">
+              <div>
+                <p>
+                  <FormattedDate date={item.createdAt} format="YY.MM.DD" />
+                </p>
+                <p
+                  style={{
+                    backgroundColor: item.category === "카테고리" && "transparent",
+                  }}
+                >
+                  {item.category !== "카테고리" && item.category}
+                </p>
+              </div>
+              <p>{item.title}</p>
+              <p>{extractTextFromHTML(item.content)}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

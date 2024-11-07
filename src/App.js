@@ -10,6 +10,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import RegisterForm from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import { ModalProvider } from "./context/ModalContext";
+import DailyContents from "./components/DailyContents";
 
 function App() {
   const [state, setState] = useState(true);
@@ -33,6 +34,7 @@ function App() {
                     <Route key={route.path} path={route.path} element={route.element} />
                   ))}
                   <Route path="/memo/:memoId" element={<MemoContents />} />
+                  <Route path="/daily/:dailyId" element={<DailyContents />} />
                 </Route>
               </Routes>
             </div>

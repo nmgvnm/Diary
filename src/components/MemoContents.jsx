@@ -22,6 +22,7 @@ const MemoContents = () => {
 
     fetchData();
   }, [memoId]);
+  console.log("memo content", content);
 
   if (!content) {
     return <div>Post not found</div>;
